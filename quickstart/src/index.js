@@ -64,7 +64,11 @@ $.getJSON('/token', function(data) {
       connectOptions.tracks = previewTracks;
     }
 
-    console.log("data token is " + data.token);
+  
+    if(!token) {
+      log("token field is empty, using node js generated token: " + data.token );
+      token = data.token; 
+    }
     // Join the Room with the token from the server and the
     // LocalParticipant's Tracks.
     Video.connect(token, connectOptions).then(roomJoined, function(error) {
